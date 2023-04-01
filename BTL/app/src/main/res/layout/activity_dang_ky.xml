@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DangKyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dangky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:text="Đăng Ký"
+            android:textColor="#2196F3"
+            android:textSize="40sp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/dktaikhoan"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="90dp"
+            android:drawableRight="@drawable/baseline_person_24"
+            android:hint="Tài khoản"></EditText>
+
+        <EditText
+            android:id="@+id/dkmatkhau"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:drawableRight="@drawable/baseline_compass_calibration_24"
+            android:hint="Mật khẩu"></EditText>
+
+        <EditText
+            android:id="@+id/dkemail"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:drawableRight="@drawable/ic_email"
+            android:hint="Email"></EditText>
+
+
+        <Button
+            android:id="@+id/dkdangky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#2196F3"
+            android:layout_marginTop="20dp"
+            android:text="Đăng Ký"></Button>
+
+        <Button
+            android:id="@+id/dkdangnhap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#2196F3"
+            android:layout_marginTop="20dp"
+            android:text="Trở về "></Button>
+
+    </LinearLayout>
+</RelativeLayout>
