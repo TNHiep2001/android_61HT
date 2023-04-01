@@ -78,11 +78,11 @@
             android:layout_marginLeft="110dp" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/breathable"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/robot"
             android:backgroundTint="#fff"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="180dp" />
 
         <ImageView
@@ -94,11 +94,12 @@
             android:layout_marginLeft="250dp" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/robot"
+            android:id="@+id/profileUser"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/user"
             android:backgroundTint="#fff"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginLeft="320dp" />
 
     </RelativeLayout>

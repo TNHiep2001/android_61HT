@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
 
     ImageView icDangNhap;
 
+    ImageView profile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
         gdvDSTruyen = findViewById(R.id.gdvDSTruyen);
         edtTimKiem = findViewById(R.id.edtTimKiem);
         icDangNhap = findViewById(R.id.icDangNhap);
+        profile = findViewById(R.id.profileUser);
     }
     private void setUp(){
         gdvDSTruyen.setAdapter(adapter);
@@ -93,6 +96,14 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,DangNhapActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, profile.class);
                 startActivity(intent);
             }
         });
