@@ -123,12 +123,35 @@ const init = async () => {
         handler: async (request, h) => {
             try{
                 const {userId} = request.params
+                const data = await knex.raw(`select userId,commicId,Name,Description,save from save_manga,commics where save_manga.userId=${userId} and save_manga.commicId = commics.id`)
+                // const data = await knex.select().table('save_manga','commics').where({
+                //     userId,
+                // })
 
-                const data = await knex.select().table('save_manga').where({
-                    userId
-                })
+                return data[0]
+            }
+            catch(e){
+                console.log(e)
+                throw new Error(e)
+            }
+        }
+    });
 
-                return data
+    server.route({
+        method: 'GET',
+        path: '/manga/delete/save/{userId}/{commicId}',
+        handler: async (request, h) => {
+            try{
+                const {userId , commicId} = request.params
+                const data = await knex('save_manga').where('userId',userId).where('commicId',commicId).del()
+                if(!data){
+                    return {
+                        message: "truyện đã được bỏ save rồi"
+                    }
+                }
+                return {
+                    message:"Bỏ save truyện thành công"
+                }
             }
             catch(e){
                 console.log(e)
