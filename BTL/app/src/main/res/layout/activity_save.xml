@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SaveActivity"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,20 +22,19 @@
             android:layout_marginTop="13dp"
             android:backgroundTint="#fff" />
 
-        <EditText
+        <TextView
             android:id="@+id/edtTimKiem"
-            android:background="@drawable/bg_edt"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="90dp"
             android:layout_marginRight="90dp"
-            android:hint="Nhập tên truyện"
-            android:textColorHint="#fff"
+            android:hint="Truyện đã save"
             android:textSize="18dp"
             android:gravity="center"
-            android:textColor="#fff"
+            android:textColorHint="@color/white"
             />
 
         <ImageView
@@ -86,7 +85,6 @@
             android:layout_marginLeft="180dp" />
 
         <ImageView
-            android:id="@+id/save_truyen"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:background="@drawable/diskette"
@@ -104,5 +102,4 @@
             android:layout_marginLeft="320dp" />
 
     </RelativeLayout>
-
 </LinearLayout>
