@@ -18,11 +18,12 @@ const init = async () => {
             try {
                 const {username,password} = request.payload
                 const user = await knex('users').where({ username }).count('id as count')
-    
+                console.log(user)
                 if(user[0].count){
-                    return {
+                    console.log(1)
+                    return h.response( {
                         checkUser : 'User already exist in database'
-                    }
+                    }).code(400)
                 }
                 const salt = await bcrypt.genSalt(10);
                 const hashedPassword = await bcrypt.hash(password, salt);
@@ -45,7 +46,7 @@ const init = async () => {
                 const {username , password} = request.payload
                 const user = await knex('users').where({ username }).count('id as count')
                 if(!user[0].count){
-                    return {message: 'incorrect username'}
+                    return h.response({message: 'incorrect username'}).code(400)
                 }  
 
                 const pwdInDB = await knex.select('password').from('users').where('username',username)
@@ -53,7 +54,7 @@ const init = async () => {
                 const isMatch = await bcrypt.compare(password , pwdInDB[0].password)
                 
                 if(!isMatch){
-                    return {message:'incorrect password'}
+                    return h.response({message:'incorrect password'}).code(400)
                 }
 
                 return {
@@ -68,13 +69,18 @@ const init = async () => {
 
     server.route({
         method: 'POST',
-        path: '/comment/{commicId}',
+        path: '/comment/{userId}/{commicId}',
         handler: async (request, h) => {
             try{
                 const {comment} = request.payload
-                const {commicId} = request.params
+                if(!comment){
+                    return h.response({
+                        message:"không được để trống comment"
+                    }).code(400)
+                }
+                const {userId,commicId} = request.params
                 console.log(comment,commicId)
-                await knex('comments').insert({content: `${comment}` , commicId: `${commicId}`})
+                await knex('comments').insert({content: `${comment}` ,userId:`${userId}`, commicId: `${commicId}`})
                 const data = await knex.select().table('comments').where('commicId', commicId)
                 console.log(data)
                 return data
@@ -99,9 +105,9 @@ const init = async () => {
                 })
 
                 if(data.length){
-                    return {
+                    return h.response({
                         message: `user với id ${userId} đã save bộ truyện này`
-                    }
+                    }).code(401)
                 }
                 
                 await knex('save_manga').insert({userId,commicId})
@@ -119,14 +125,11 @@ const init = async () => {
 
     server.route({
         method: 'GET',
-        path: '/manga/get/{userId}',
+        path: '/manga/get/save/{userId}',
         handler: async (request, h) => {
             try{
                 const {userId} = request.params
                 const data = await knex.raw(`select userId,commicId,Name,Description,url from save_manga,commics where save_manga.userId=${userId} and save_manga.commicId = commics.id`)
-                // const data = await knex.select().table('save_manga','commics').where({
-                //     userId,
-                // })
 
                 return data[0]
             }
@@ -138,16 +141,16 @@ const init = async () => {
     });
 
     server.route({
-        method: 'GET',
-        path: '/manga/delete/save/{userId}/{commicId}',
+        method: 'DELETE',
+        path: '/manga/unsave/{userId}/{commicId}',
         handler: async (request, h) => {
             try{
                 const {userId , commicId} = request.params
                 const data = await knex('save_manga').where('userId',userId).where('commicId',commicId).del()
                 if(!data){
-                    return {
+                    return h.response({
                         message: "truyện đã được bỏ save rồi"
-                    }
+                    }).code(401)
                 }
                 return {
                     message:"Bỏ save truyện thành công"

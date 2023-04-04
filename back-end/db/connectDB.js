@@ -13,5 +13,9 @@ const option = {
 // connect to database
 const knex = require('knex')(option)
 
+// console.log(knex.select('id').from('users').then(()=>{
+//     console.log(1)
+// }).catch(e=>console.log(e)))
+
 module.exports = knex
 
