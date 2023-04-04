@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.btl.adapter.listTruyenAdapter;
 import com.example.btl.api.ApiLayTruyen;
@@ -37,12 +39,20 @@ public class DangNhapActivity extends AppCompatActivity {
     }
     private void setUp(){
     }
+    private void infoMessage(){Toast.makeText(this,"Dang nhap thanh cong",Toast.LENGTH_SHORT).show();}
     private void setClik() {
         dangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DangNhapActivity.this,MainActivity.class);
-                startActivity(intent);
+                infoMessage();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(DangNhapActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                },2000);
             }
         });
 

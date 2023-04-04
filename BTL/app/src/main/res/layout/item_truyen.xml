@@ -29,6 +29,13 @@
             android:text="Truyen tranh"
             android:textSize="12dp"
             />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/diskette"
+            android:padding="6dp"
+            app:tint="#F5C33B" />
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
@@ -37,11 +44,12 @@
         android:gravity="center"
         android:layout_marginTop="8dp">
         <ImageView
+            android:id="@+id/imgliketruyen"
             android:layout_width="40px"
             android:layout_height="14dp"
-            android:background="@drawable/like"
-            android:backgroundTint="#F35369"
-            android:layout_marginTop="3dp"/>
+            android:src="@drawable/like"
+            android:layout_marginTop="3dp"
+            app:tint="#F35369" />
 
         <TextView
             android:id="@+id/txvCountLike"

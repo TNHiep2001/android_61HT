@@ -37,11 +37,12 @@
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="-90dp">
         <ImageView
+            android:id="@+id/imglike"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:background="@drawable/like"
+            android:src="@drawable/like"
             android:layout_marginTop="2dp"
-            android:backgroundTint="#fff"/>
+            app:tint="#fff" />
         <TextView
             android:id="@+id/txvCountLikeChap"
             android:layout_width="wrap_content"

@@ -77,7 +77,7 @@ public class listTruyen implements Serializable {
         return slLike;
     }
 
-    public void setSlLike(Integer urlAnh) {
+    public void setSlLike(Integer slLike) {
         this.slLike = slLike;
     }
 
