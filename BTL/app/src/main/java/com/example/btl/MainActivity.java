@@ -1,8 +1,10 @@
 package com.example.btl;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.btl.adapter.listTruyenAdapter;
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
 
     @Override
     public void batDau() {
-        Toast.makeText(this,"Dang xu ly du lieu",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"Đang xử lý dữ liệu",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -136,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
             }
             adapter = new listTruyenAdapter(this, 0, listTruyenArrayList);
             gdvDSTruyen.setAdapter(adapter);
+            Toast.makeText(this,"Lấy dữ liệu thành công",Toast.LENGTH_SHORT).show();
         }
         catch (JSONException e){
 
@@ -144,6 +148,6 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
 
     @Override
     public void biLoi() {
-        Toast.makeText(this,"Loi ket noi",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"Lỗi kết nối",Toast.LENGTH_SHORT).show();
     }
 }

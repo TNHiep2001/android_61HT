@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:text="123"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"/>
 
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:text="89012"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"/>
 
@@ -183,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tôi rất thích đọc truyện tranh,đi du lịch và xem những bộ phim hay"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="16dp" />
         </LinearLayout>
     </LinearLayout>
