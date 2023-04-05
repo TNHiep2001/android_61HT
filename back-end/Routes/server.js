@@ -5,7 +5,6 @@ const Hapi = require('@hapi/hapi');
 const bcrypt = require('bcryptjs')
 
 const ipv4 = require('../getIpv4')
-console.log(ipv4)
 
 const init = async () => {
 
