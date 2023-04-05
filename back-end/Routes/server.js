@@ -4,11 +4,14 @@ const knex = require('../db/connectDB')
 const Hapi = require('@hapi/hapi');
 const bcrypt = require('bcryptjs')
 
+const ipv4 = require('../getIpv4')
+console.log(ipv4)
+
 const init = async () => {
 
     const server = Hapi.server({
         port: 3000,
-        host: 'localhost',
+        host: ipv4,
         routes: {
             cors: true
         }
