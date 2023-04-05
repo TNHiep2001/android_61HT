@@ -23,8 +23,6 @@
             android:backgroundTint="#fff" />
 
         <TextView
-            android:id="@+id/edtTimKiem"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
@@ -48,58 +46,9 @@
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
-    <GridView
-        android:id="@+id/gdvDSTruyen"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_saveTruyen"
         android:layout_width="match_parent"
-        android:layout_height="610dp"
-        android:numColumns="3">
-    </GridView>
+        android:layout_height="wrap_content"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:background="#ff6122">
-
-        <ImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:background="@drawable/binoculars"
-            android:backgroundTint="#fff"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="40dp" />
-
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@drawable/open_book"
-            android:backgroundTint="#fff"
-            android:layout_marginTop="11dp"
-            android:layout_marginLeft="110dp" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/robot"
-            android:backgroundTint="#fff"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="180dp" />
-
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:background="@drawable/diskette"
-            android:backgroundTint="#fff"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="250dp" />
-
-        <ImageView
-            android:id="@+id/profileUser"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/user"
-            android:backgroundTint="#fff"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="320dp" />
-
-    </RelativeLayout>
 </LinearLayout>
