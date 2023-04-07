@@ -134,7 +134,7 @@ const init = async () => {
         handler: async (request, h) => {
             try{
                 const {userId} = request.params
-                const data = await knex.raw(`select userId,commicId,Name,Description,url from save_manga,commics where save_manga.userId=${userId} and save_manga.commicId = commics.id`)
+                const data = await knex.raw(`select userId,commicId,Name,Description from save_manga,commics where save_manga.userId=${userId} and save_manga.commicId = commics.id`)
 
                 return data[0]
             }
