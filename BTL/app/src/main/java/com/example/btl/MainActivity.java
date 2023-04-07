@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,15 +19,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.btl.adapter.listTruyenAdapter;
+import com.example.btl.api.ApiAddSaveTruyen;
 import com.example.btl.api.ApiLayTruyen;
 import com.example.btl.interfaces.LayTruyenVe;
+import com.example.btl.object.AddSaveTruyen;
 import com.example.btl.object.listTruyen;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements LayTruyenVe {
     GridView gdvDSTruyen;
@@ -42,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
     ImageView profile;
 
     ImageView savetruyen;
+
+    ImageView img_save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
         icDangNhap = findViewById(R.id.icDangNhap);
         profile = findViewById(R.id.profileUser);
         savetruyen = findViewById(R.id.save_truyen);
+        img_save = findViewById(R.id.img_save1);
     }
     private void setUp(){
         gdvDSTruyen.setAdapter(adapter);
@@ -149,5 +162,32 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
     @Override
     public void biLoi() {
         Toast.makeText(this,"Lỗi kết nối",Toast.LENGTH_SHORT).show();
+    }
+
+    public void onImageClick(View view) {
+        ApiAddSaveTruyen.apiAddSaveTruyen.addSaveTruyen().enqueue(new Callback<AddSaveTruyen>() {
+            @Override
+            public void onResponse(Call<AddSaveTruyen> call, Response<AddSaveTruyen> response) {
+                if (response.isSuccessful()) {
+                    // xử lý dữ liệu trả về khi response thành công
+                    AddSaveTruyen addSaveTruyens = response.body();
+                    String b = addSaveTruyens.getMessage();
+                    Toast.makeText(MainActivity.this,b,Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        String errorBody = response.errorBody().string();
+                        Log.e("API Error", errorBody);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddSaveTruyen> call, Throwable t) {
+                Toast.makeText(MainActivity.this,"ERROR",Toast.LENGTH_SHORT).show();
+                Log.e("API Error", t.getMessage());
+            }
+        });
     }
 }
