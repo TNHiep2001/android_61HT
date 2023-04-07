@@ -98,6 +98,24 @@ const init = async () => {
     });
 
     server.route({
+        method: 'GET',
+        path: '/comment/get/{commicId}',
+        handler: async (request, h) => {
+            try{
+                const {commicId} = request.params
+      
+                const data = await knex.select().table('comments').where('commicId', commicId)
+                console.log(data)
+                return data
+            }
+            catch(e){
+                console.log(e)
+                throw new Error(e)
+            }
+        }
+    });
+
+    server.route({
         method: 'POST',
         path: '/manga/save/{userId}/{commicId}',
         handler: async (request, h) => {
