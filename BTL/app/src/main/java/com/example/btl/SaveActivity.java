@@ -5,13 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.btl.api.ApiAddSaveTruyen;
 import com.example.btl.api.ApiclientSave;
 import com.example.btl.adapter.saveTruyenAdapter;
+import com.example.btl.object.AddSaveTruyen;
+import com.example.btl.object.listTruyen;
 import com.example.btl.object.saveTruyen;
 
 import java.io.IOException;
@@ -24,13 +33,16 @@ import retrofit2.Response;
 
 public class SaveActivity extends AppCompatActivity {
     RecyclerView rcv_saveTruyen;
+    ImageView img_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
         rcv_saveTruyen = findViewById(R.id.rcv_saveTruyen);
+        img_back = findViewById(R.id.img_back);
         getApi();
+        setClik();
     }
     public void getApi(){
         Call<List<saveTruyen>> apicall = ApiclientSave.getInstance().getApis().getSaveTruyen();
@@ -64,5 +76,14 @@ public class SaveActivity extends AppCompatActivity {
         rcv_saveTruyen.setLayoutManager(new LinearLayoutManager(this));
         saveTruyenAdapter SaveTruyenApdater = new saveTruyenAdapter(this,saveTruyens);
         rcv_saveTruyen.setAdapter(SaveTruyenApdater);
+    }
+    private void setClik(){
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SaveActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
