@@ -101,12 +101,10 @@ const init = async () => {
           userId: `${userId}`,
           commicId: `${commicId}`,
         });
-        const data = await knex
-          .select()
-          .table("comments")
-          .where("commicId", commicId);
-        console.log(data);
-        return data;
+        const sql = `select CommicId,userId,Content,username from comments,users where comments.userId=${userId} and comments.userId = users.Id`
+        const data = await knex.raw(sql)
+        const result = data[0].at(-1)
+        return result
       } catch (e) {
         console.log(e);
         throw new Error(e);
