@@ -7,7 +7,23 @@ import java.io.Serializable;
 
 public class listTruyen implements Serializable {
     private String tenTruyen, tenChap, urlAnh, ngayDang;
-    private Integer slLike, slView, slChap;
+    private Integer slLike, slView, slChap,idUser,idTruyen;
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+    }
+
+    public Integer getIdTruyen() {
+        return idTruyen;
+    }
+
+    public void setIdTruyen(Integer idTruyen) {
+        this.idTruyen = idTruyen;
+    }
 
     public listTruyen(){
 
@@ -21,9 +37,11 @@ public class listTruyen implements Serializable {
         urlAnh = o.getString("urlAnh");
         slLike = o.getInt("slLike");
         slView = o.getInt("slView");
+        idUser = o.getInt("idUser");
+        idTruyen = o.getInt("idTruyen");
     }
 
-    public listTruyen(String tenTruyen, String tenChap, int slChap, String ngayDang, String urlAnh, int slLike, int slView) {
+    public listTruyen(String tenTruyen, String tenChap, int slChap, String ngayDang, String urlAnh, int slLike, int slView, int idUser, int idTruyen) {
         this.tenTruyen = tenTruyen;
         this.tenChap = tenChap;
         this.slChap = slChap;
@@ -31,6 +49,8 @@ public class listTruyen implements Serializable {
         this.urlAnh = urlAnh;
         this.slLike = slLike;
         this.slView = slView;
+        this.idUser = idUser ;
+        this.idTruyen = idTruyen;
     }
 
     public String getTenTruyen() {

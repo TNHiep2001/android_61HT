@@ -36,6 +36,7 @@
         android:layout_height="90dp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="-90dp">
+
         <ImageView
             android:id="@+id/imglike"
             android:layout_width="16dp"
@@ -82,6 +83,13 @@
             android:layout_marginLeft="158dp"
             android:textColor="#fff"
             android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/img_save"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/diskette"
+            android:layout_marginLeft="200dp"
+            app:tint="#F5C33B" />
     </RelativeLayout>
 
     <ListView

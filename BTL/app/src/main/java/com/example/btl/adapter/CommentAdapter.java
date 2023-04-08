@@ -32,7 +32,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
-        holder.name.setText(comments.get(position).getContent());
+        holder.name.setText(comments.get(position).getUserName());
+        holder.content.setText(comments.get(position).getContent());
     }
 
     @Override
@@ -42,10 +43,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
+        private TextView content;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.txv_name);
+            content = itemView.findViewById(R.id.txv_mota);
         }
     }
 }

@@ -22,6 +22,8 @@ public class saveTruyenAdapter extends RecyclerView.Adapter<saveTruyenAdapter.Vi
 
     Context mcontext;
     List<saveTruyen> saveTruyens;
+
+
     public saveTruyenAdapter(Context context, List<saveTruyen> saveTruyens) {
         this.saveTruyens = saveTruyens;
         this.mcontext = context;
@@ -39,7 +41,7 @@ public class saveTruyenAdapter extends RecyclerView.Adapter<saveTruyenAdapter.Vi
         holder.name.setText(saveTruyens.get(position).getName());
         holder.mota.setText(saveTruyens.get(position).getDescription());
         Glide.with(mcontext).load(saveTruyens.get(position).getUrl()).placeholder(R.drawable.t1).error(R.drawable.ic_launcher_background).into(holder.image);
-
+        holder.itemView.setTag(position);
     }
 
     @Override
@@ -50,11 +52,21 @@ public class saveTruyenAdapter extends RecyclerView.Adapter<saveTruyenAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name,mota;
         private ImageView image;
+        ImageView imgdelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.txv_name);
             mota = itemView.findViewById(R.id.txv_mota);
             image = itemView.findViewById(R.id.imgAnhTruyen);
+            imgdelete = itemView.findViewById(R.id.img_delete);
+
+            imgdelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    // xử lý sự kiện click ở đây
+                }
+            });
         }
     }
 }
