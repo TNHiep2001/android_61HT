@@ -118,12 +118,7 @@ public class ChapActivity extends AppCompatActivity {
                     public void onResponse(Call<AddSaveTruyen> call, Response<AddSaveTruyen> response) {
                         // xử lý dữ liệu trả về khi response thành công
                         if (response.code() == 401){
-                            try {
-                                String errorBody = response.errorBody().string();
-                                Toast.makeText(ChapActivity.this,errorBody,Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            Toast.makeText(ChapActivity.this,"Truyện đã được save",Toast.LENGTH_SHORT).show();
                         }
                         if (response.code()==200){
                             AddSaveTruyen addSaveTruyens = response.body();

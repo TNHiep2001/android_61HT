@@ -60,7 +60,6 @@ public class SaveActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     // xử lý dữ liệu trả về khi response thành công
                     saveTruyens = response.body();
-                    Toast.makeText(SaveActivity.this,"Got Truyen",Toast.LENGTH_SHORT).show();
                     setAdapter(saveTruyens);
                 } else {
                     try {

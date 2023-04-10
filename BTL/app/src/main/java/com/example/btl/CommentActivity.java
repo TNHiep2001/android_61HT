@@ -82,7 +82,6 @@ public class CommentActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     // xử lý dữ liệu trả về khi response thành công
                     List<Comment> comments = response.body();
-                    Toast.makeText(CommentActivity.this,"Got Truyen",Toast.LENGTH_SHORT).show();
                     setAdapter(comments);
                 } else {
                     try {
