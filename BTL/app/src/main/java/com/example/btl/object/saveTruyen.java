@@ -12,6 +12,8 @@ public class saveTruyen {
     @SerializedName("url")
     String url;
 
+    Integer userId;
+    Integer commicId;
     public String getName() {
         return Name;
     }
@@ -24,4 +26,11 @@ public class saveTruyen {
         return url;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public Integer getCommicId() {
+        return commicId;
+    }
 }

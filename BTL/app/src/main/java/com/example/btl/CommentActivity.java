@@ -17,9 +17,12 @@ import com.example.btl.adapter.CommentAdapter;
 import com.example.btl.adapter.saveTruyenAdapter;
 import com.example.btl.api.ApiComment;
 import com.example.btl.api.ApiGetComment;
+import com.example.btl.api.ApiPostComment;
 import com.example.btl.api.ApiclientSave;
 import com.example.btl.object.AddSaveTruyen;
 import com.example.btl.object.Comment;
+import com.example.btl.object.PostComment;
+import com.example.btl.object.listTruyen;
 import com.example.btl.object.saveTruyen;
 
 import java.io.BufferedReader;
@@ -42,38 +45,43 @@ public class CommentActivity extends AppCompatActivity {
 
     String CommentText;
 
+    listTruyen listTruyen;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        Bundle b = getIntent().getBundleExtra("data");
+        listTruyen =(listTruyen) b.getSerializable("truyen");
+        anhXa();
+        getCommentsApi();
+        setClick();
+    }
+
+    private void anhXa(){
         comment_edit_text = findViewById(R.id.comment_edit_text);
         post_comment_button = findViewById(R.id.post_comment_button);
         rcv_comments = findViewById(R.id.rcv_comment);
-        getCommentsApi();
-        setClick();
     }
 
     public void setClick(){
         post_comment_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                CommentText = comment_edit_text.getText().toString();
-                Log.v("EditText",CommentText);
-                comment_edit_text.setText("");
+                postComment();
             }
         });
     }
 
     public void getCommentsApi(){
 
-        Call<List<Comment>> apicall = ApiComment.getInstance().getApis().getComment(1);
+        Call<List<Comment>> apicall = ApiComment.getInstance().getApis().getComment(listTruyen.getIdTruyen());
         apicall.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
                 if (response.isSuccessful()) {
                     // xử lý dữ liệu trả về khi response thành công
                     List<Comment> comments = response.body();
-                    Toast.makeText(CommentActivity.this,"Got Truyen",Toast.LENGTH_SHORT).show();
                     setAdapter(comments);
                 } else {
                     try {
@@ -98,5 +106,22 @@ public class CommentActivity extends AppCompatActivity {
         rcv_comments.setLayoutManager(new LinearLayoutManager(this));
         CommentAdapter commentAdapter = new CommentAdapter(this,comments);
         rcv_comments.setAdapter(commentAdapter);
+    }
+    private  void postComment(){
+        CommentText = comment_edit_text.getText().toString();
+        PostComment postComment = new PostComment(CommentText);
+        comment_edit_text.setText("");
+        ApiPostComment.apiPostComment.postComment(listTruyen.getIdUser(),listTruyen.getIdTruyen(),postComment).enqueue(new Callback<PostComment>() {
+            @Override
+            public void onResponse(Call<PostComment> call, Response<PostComment> response) {
+                Toast.makeText(CommentActivity.this,"Post thanh cong",Toast.LENGTH_SHORT).show();
+                getCommentsApi();
+            }
+
+            @Override
+            public void onFailure(Call<PostComment> call, Throwable t) {
+                Toast.makeText(CommentActivity.this,"ERROR",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

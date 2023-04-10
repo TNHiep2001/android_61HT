@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -17,10 +18,17 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.btl.adapter.ChapTruyenAdapter;
+import com.example.btl.api.ApiAddSaveTruyen;
+import com.example.btl.object.AddSaveTruyen;
 import com.example.btl.object.ChapTruyen;
 import com.example.btl.object.listTruyen;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChapActivity extends AppCompatActivity {
     TextView txvTenTruyens; TextView txvCountLikeChap; TextView txvCountViewChap;
@@ -30,6 +38,8 @@ public class ChapActivity extends AppCompatActivity {
     ListView lsvDanhSachChap;
     ArrayList<ChapTruyen> arrChap;
     ChapTruyenAdapter chapTruyenAdapter;
+
+    ImageView imgsave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,7 @@ public class ChapActivity extends AppCompatActivity {
         txvCountViewChap = findViewById(R.id.txvCountViewChap);
         imgComment = findViewById(R.id.imgComment);
         imglike = findViewById(R.id.imglike);
+        imgsave = findViewById(R.id.img_save);
     }
     private void setUp(){
         txvTenTruyens.setText(listTruyen.getTenTruyen());
@@ -83,6 +94,9 @@ public class ChapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChapActivity.this, CommentActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("truyen",listTruyen);
+                intent.putExtra("data",b);
                 startActivity(intent);
             }
         });
@@ -93,6 +107,32 @@ public class ChapActivity extends AppCompatActivity {
                 imglike.setColorFilter(Color.rgb(243,83,105));
                 txvCountLikeChap.setText(Integer.toString((listTruyen.getSLLike() + 1)));
                 infoMessage();
+            }
+        });
+
+        imgsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiAddSaveTruyen.apiAddSaveTruyen.addSaveTruyen(listTruyen.getIdUser(),listTruyen.getIdTruyen()).enqueue(new Callback<AddSaveTruyen>() {
+                    @Override
+                    public void onResponse(Call<AddSaveTruyen> call, Response<AddSaveTruyen> response) {
+                        // xử lý dữ liệu trả về khi response thành công
+                        if (response.code() == 401){
+                            Toast.makeText(ChapActivity.this,"Truyện đã được save",Toast.LENGTH_SHORT).show();
+                        }
+                        if (response.code()==200){
+                            AddSaveTruyen addSaveTruyens = response.body();
+                            String b = addSaveTruyens.getMessage();
+                            Toast.makeText(ChapActivity.this,b,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddSaveTruyen> call, Throwable t) {
+                        Toast.makeText(ChapActivity.this,"ERROR",Toast.LENGTH_SHORT).show();
+                        Log.e("API Error", t.getMessage());
+                    }
+                });
             }
         });
     }

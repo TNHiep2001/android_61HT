@@ -90,8 +90,8 @@ const init = async () => {
     path: "/comment/{userId}/{commicId}",
     handler: async (request, h) => {
       try {
-        const { comment } = request.payload;
-        if (!comment) {
+        const { Content } = request.payload;
+        if (!Content) {
           return h
             .response({
               message: "không được để trống comment",
@@ -99,16 +99,16 @@ const init = async () => {
             .code(400);
         }
         const { userId, commicId } = request.params;
-        console.log(comment, commicId);
+        console.log(Content, commicId);
         await knex("comments").insert({
-          content: `${comment}`,
+          content: `${Content}`,
           userId: `${userId}`,
           commicId: `${commicId}`,
         });
-        const sql = `select CommicId,userId,Content,username from comments,users where comments.userId=${userId} and comments.userId = users.Id`
-        const data = await knex.raw(sql)
-        const result = data[0].at(-1)
-        return result
+        const sql = `select CommicId,userId,Content,username from comments,users where comments.userId=${userId} and comments.userId = users.Id`;
+        const data = await knex.raw(sql);
+        const result = data[0].at(-1);
+        return result;
       } catch (e) {
         console.log(e);
         throw new Error(e);
@@ -120,17 +120,16 @@ const init = async () => {
     method: "GET",
     path: "/comment/get/{commicId}",
     handler: async (request, h) => {
-        try{
-            const {commicId} = request.params
-            const sql = `select CommicId,userId,Content,username from comments,users where comments.commicId=${commicId} and comments.userId = users.Id`
-            const data = await knex.raw(sql)
-            const result = data[0]
-            return result
-        }
-        catch(e){
-            console.log(e)
-            throw new Error(e)
-        }
+      try {
+        const { commicId } = request.params;
+        const sql = `select CommicId,userId,Content,username from comments,users where comments.commicId=${commicId} and comments.userId = users.Id`;
+        const data = await knex.raw(sql);
+        const result = data[0];
+        return result;
+      } catch (e) {
+        console.log(e);
+        throw new Error(e);
+      }
     },
   });
 

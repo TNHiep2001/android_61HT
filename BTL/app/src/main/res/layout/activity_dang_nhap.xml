@@ -17,7 +17,7 @@
             android:layout_width="115dp"
             android:layout_height="115dp"
             android:layout_marginBottom="40dp"
-            android:src="@drawable/robot"></ImageView>
+            android:src="@drawable/robot" />
 
         <EditText
             android:id="@+id/dkdangnhap"
@@ -27,7 +27,7 @@
             android:drawableRight="@drawable/baseline_person_24"
             android:ems="15"
             android:hint="Đăng Nhập"
-            android:textSize="20dp"></EditText>
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/dkpassword"
@@ -38,7 +38,7 @@
             android:ems="15"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textSize="20dp"></EditText>
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/dkquenmatkhau"
@@ -49,7 +49,7 @@
             android:layout_marginBottom="20dp"
             android:text="Quên mật khẩu"
             android:textColor="#000"
-            android:textSize="15dp"></TextView>
+            android:textSize="15dp" />
 
         <Button
             android:id="@+id/dangnhap"
@@ -60,7 +60,7 @@
             android:text="Đăng Nhập"
             android:textColor="#2196F3"
             android:textSize="16dp"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/dangky"
@@ -70,7 +70,7 @@
             android:text="Đăng Ký"
             android:textColor="#2196F3"
             android:textSize="16dp"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold" />
 
     </LinearLayout>
 </RelativeLayout>

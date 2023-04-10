@@ -30,14 +30,7 @@
             android:textSize="12dp"
             />
 
-        <ImageView
-            android:id="@+id/img_save1"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/diskette"
-            android:padding="6dp"
-            android:onClick="onImageClick"
-            app:tint="#F5C33B" />
+
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout

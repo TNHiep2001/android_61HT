@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
 
     ImageView savetruyen;
 
-    ImageView img_save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
         icDangNhap = findViewById(R.id.icDangNhap);
         profile = findViewById(R.id.profileUser);
         savetruyen = findViewById(R.id.save_truyen);
-        img_save = findViewById(R.id.img_save1);
     }
     private void setUp(){
         gdvDSTruyen.setAdapter(adapter);
@@ -164,30 +162,4 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
         Toast.makeText(this,"Lỗi kết nối",Toast.LENGTH_SHORT).show();
     }
 
-    public void onImageClick(View view) {
-        ApiAddSaveTruyen.apiAddSaveTruyen.addSaveTruyen().enqueue(new Callback<AddSaveTruyen>() {
-            @Override
-            public void onResponse(Call<AddSaveTruyen> call, Response<AddSaveTruyen> response) {
-                if (response.isSuccessful()) {
-                    // xử lý dữ liệu trả về khi response thành công
-                    AddSaveTruyen addSaveTruyens = response.body();
-                    String b = addSaveTruyens.getMessage();
-                    Toast.makeText(MainActivity.this,b,Toast.LENGTH_SHORT).show();
-                } else {
-                    try {
-                        String errorBody = response.errorBody().string();
-                        Log.e("API Error", errorBody);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AddSaveTruyen> call, Throwable t) {
-                Toast.makeText(MainActivity.this,"ERROR",Toast.LENGTH_SHORT).show();
-                Log.e("API Error", t.getMessage());
-            }
-        });
-    }
 }

@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiAddSaveTruyen {
 
@@ -15,6 +16,6 @@ public interface ApiAddSaveTruyen {
             .build()
             .create(ApiAddSaveTruyen.class);
 
-    @POST("manga/save/1/1")
-    Call<AddSaveTruyen> addSaveTruyen();
+    @POST("manga/save/{userId}/{commicId}")
+    Call<AddSaveTruyen> addSaveTruyen(@Path("userId") int userId, @Path("commicId") int commicId);
 }
