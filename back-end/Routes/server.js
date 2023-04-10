@@ -67,7 +67,7 @@ const init = async () => {
         console.log(pwdInDB)
 
         const getUser = await knex.select().from('users').where("username",username)
-        
+
         const isMatch = await bcrypt.compare(password, pwdInDB[0].password);
 
         if (!isMatch) {
