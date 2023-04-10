@@ -64,7 +64,10 @@ const init = async () => {
           .select("password")
           .from("users")
           .where("username", username);
+        console.log(pwdInDB)
 
+        const getUser = await knex.select().from('users').where("username",username)
+        
         const isMatch = await bcrypt.compare(password, pwdInDB[0].password);
 
         if (!isMatch) {
@@ -73,6 +76,7 @@ const init = async () => {
 
         return {
           message: "login successfully",
+          userId:getUser[0].Id
         };
       } catch (error) {
         console.log(error);
