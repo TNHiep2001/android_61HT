@@ -23,6 +23,7 @@ import com.example.btl.api.ApiAddSaveTruyen;
 import com.example.btl.api.ApiLayTruyen;
 import com.example.btl.interfaces.LayTruyenVe;
 import com.example.btl.object.AddSaveTruyen;
+import com.example.btl.object.User;
 import com.example.btl.object.listTruyen;
 
 import org.json.JSONArray;
@@ -53,11 +54,14 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
 
     ImageView savetruyen;
 
+    int userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userId = getIntent().getIntExtra("userId",1);
         init();
         anhXa();
         setUp();
@@ -102,10 +106,11 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 listTruyen listTruyen = listTruyenArrayList.get(i);
+                Intent intent = new Intent(MainActivity.this,ChapActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("truyen",listTruyen);
-                Intent intent = new Intent(MainActivity.this,ChapActivity.class);
                 intent.putExtra("data",b);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -121,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, profile.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -129,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements LayTruyenVe {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SaveActivity.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });

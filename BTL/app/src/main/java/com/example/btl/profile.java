@@ -9,10 +9,12 @@ import android.widget.Button;
 
 public class profile extends AppCompatActivity {
     Button backToHomePage;
+    Integer userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        userId = getIntent().getIntExtra("userId",1);
         init();
         anhXa();
         setUp();
@@ -31,6 +33,7 @@ public class profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(profile.this,MainActivity.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });

@@ -24,6 +24,7 @@ import com.example.btl.api.ApiclientSave;
 import com.example.btl.adapter.saveTruyenAdapter;
 import com.example.btl.object.AddSaveTruyen;
 import com.example.btl.object.DeleteSaveTruyen;
+import com.example.btl.object.User;
 import com.example.btl.object.listTruyen;
 import com.example.btl.object.saveTruyen;
 
@@ -43,17 +44,20 @@ public class SaveActivity extends AppCompatActivity {
 
     saveTruyenAdapter SaveTruyenApdater;
 
+    Integer userId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
         rcv_saveTruyen = findViewById(R.id.rcv_saveTruyen);
         img_back = findViewById(R.id.img_back);
+        userId = getIntent().getIntExtra("userId",1);
         getApi();
         setClik();
     }
     public void getApi(){
-        Call<List<saveTruyen>> apicall = ApiclientSave.getInstance().getApis().getSaveTruyen(1);
+        Call<List<saveTruyen>> apicall = ApiclientSave.getInstance().getApis().getSaveTruyen(userId);
         apicall.enqueue(new Callback<List<saveTruyen>>() {
             @Override
             public void onResponse(Call<List<saveTruyen>> call, Response<List<saveTruyen>> response) {
@@ -89,6 +93,7 @@ public class SaveActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SaveActivity.this, MainActivity.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -102,7 +107,7 @@ public class SaveActivity extends AppCompatActivity {
                         int position = rv.getChildAdapterPosition(child);
                         saveTruyen data = saveTruyens.get(position);
 
-                        ApiDeleteSaveTruyen.api.deleteSaveTruyen(data.getUserId(),data.getCommicId()).enqueue(new Callback<DeleteSaveTruyen>() {
+                        ApiDeleteSaveTruyen.api.deleteSaveTruyen(userId,data.getCommicId()).enqueue(new Callback<DeleteSaveTruyen>() {
                             @Override
                             public void onResponse(Call<DeleteSaveTruyen> call, Response<DeleteSaveTruyen> response) {
                                 Toast.makeText(SaveActivity.this,"Delete thanh cong",Toast.LENGTH_SHORT).show();

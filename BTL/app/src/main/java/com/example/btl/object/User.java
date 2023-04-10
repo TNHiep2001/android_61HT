@@ -1,6 +1,9 @@
 package com.example.btl.object;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
+    @SerializedName("userId")
     int id;
     String username;
     String password;

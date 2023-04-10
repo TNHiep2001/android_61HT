@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.btl.adapter.listTruyenAdapter;
@@ -32,6 +33,8 @@ import retrofit2.Response;
 public class DangNhapActivity extends AppCompatActivity {
     Button dangnhap, dangky;
     EditText dkdangnhap,dkpassword;
+    TextView qmk;
+    User users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class DangNhapActivity extends AppCompatActivity {
         dangky = findViewById(R.id.dangky);
         dkdangnhap = findViewById(R.id.dkdangnhap);
         dkpassword = findViewById(R.id.dkpassword);
+        qmk = findViewById(R.id.dkquenmatkhau);
     }
     private void setUp(){
     }
@@ -68,6 +72,14 @@ public class DangNhapActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        qmk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DangNhapActivity.this,QuenMatKhauActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private  void login(){
         String dataUser = dkdangnhap.getText().toString();
@@ -76,17 +88,6 @@ public class DangNhapActivity extends AppCompatActivity {
         ApiSigup.api.login(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    // xử lý dữ liệu trả về khi response thành công
-                    User users = response.body();
-                } else {
-                    try {
-                        String errorBody = response.errorBody().string();
-                        Log.e("API Error", errorBody);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
                 if (response.code() == 400){
                     Toast.makeText(DangNhapActivity.this,"Tai khoan hoac mat khau khong chinh xac",Toast.LENGTH_SHORT).show();
                 }
@@ -95,7 +96,10 @@ public class DangNhapActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            users = response.body();
                             Intent intent = new Intent(DangNhapActivity.this,MainActivity.class);
+                            int userId = users.getId();
+                            intent.putExtra("userId",userId);
                             startActivity(intent);
                             finish();
                         }

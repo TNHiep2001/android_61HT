@@ -22,6 +22,7 @@ import com.example.btl.api.ApiclientSave;
 import com.example.btl.object.AddSaveTruyen;
 import com.example.btl.object.Comment;
 import com.example.btl.object.PostComment;
+import com.example.btl.object.User;
 import com.example.btl.object.listTruyen;
 import com.example.btl.object.saveTruyen;
 
@@ -47,6 +48,8 @@ public class CommentActivity extends AppCompatActivity {
 
     listTruyen listTruyen;
 
+    Integer userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class CommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comment);
         Bundle b = getIntent().getBundleExtra("data");
         listTruyen =(listTruyen) b.getSerializable("truyen");
+        userId = getIntent().getIntExtra("userId",1);
         anhXa();
         getCommentsApi();
         setClick();
@@ -111,7 +115,7 @@ public class CommentActivity extends AppCompatActivity {
         CommentText = comment_edit_text.getText().toString();
         PostComment postComment = new PostComment(CommentText);
         comment_edit_text.setText("");
-        ApiPostComment.apiPostComment.postComment(listTruyen.getIdUser(),listTruyen.getIdTruyen(),postComment).enqueue(new Callback<PostComment>() {
+        ApiPostComment.apiPostComment.postComment(userId,listTruyen.getIdTruyen(),postComment).enqueue(new Callback<PostComment>() {
             @Override
             public void onResponse(Call<PostComment> call, Response<PostComment> response) {
                 Toast.makeText(CommentActivity.this,"Post thanh cong",Toast.LENGTH_SHORT).show();

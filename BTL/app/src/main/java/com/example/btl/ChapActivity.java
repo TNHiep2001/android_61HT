@@ -21,6 +21,7 @@ import com.example.btl.adapter.ChapTruyenAdapter;
 import com.example.btl.api.ApiAddSaveTruyen;
 import com.example.btl.object.AddSaveTruyen;
 import com.example.btl.object.ChapTruyen;
+import com.example.btl.object.User;
 import com.example.btl.object.listTruyen;
 
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class ChapActivity extends AppCompatActivity {
     ChapTruyenAdapter chapTruyenAdapter;
 
     ImageView imgsave;
+    Integer userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class ChapActivity extends AppCompatActivity {
     private void init(){
         Bundle b = getIntent().getBundleExtra("data");
         listTruyen =(listTruyen) b.getSerializable("truyen");
-
+        userId = getIntent().getIntExtra("userId",1);
         arrChap = new ArrayList<>();
         for(int i=1; i<=(listTruyen.getSlChap()); i++){
             arrChap.add(new ChapTruyen("Chapter " + i,listTruyen.getNgayDang()));
@@ -95,8 +97,10 @@ public class ChapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ChapActivity.this, CommentActivity.class);
                 Bundle b = new Bundle();
+
                 b.putSerializable("truyen",listTruyen);
                 intent.putExtra("data",b);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -113,10 +117,9 @@ public class ChapActivity extends AppCompatActivity {
         imgsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApiAddSaveTruyen.apiAddSaveTruyen.addSaveTruyen(listTruyen.getIdUser(),listTruyen.getIdTruyen()).enqueue(new Callback<AddSaveTruyen>() {
+                ApiAddSaveTruyen.apiAddSaveTruyen.addSaveTruyen(userId,listTruyen.getIdTruyen()).enqueue(new Callback<AddSaveTruyen>() {
                     @Override
                     public void onResponse(Call<AddSaveTruyen> call, Response<AddSaveTruyen> response) {
-                        // xử lý dữ liệu trả về khi response thành công
                         if (response.code() == 401){
                             Toast.makeText(ChapActivity.this,"Truyện đã được save",Toast.LENGTH_SHORT).show();
                         }
